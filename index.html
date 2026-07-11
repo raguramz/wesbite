@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raguram Ramesh Kumar — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FCFBF8;
+    --ink: #17172B;
+    --sub: #3D3A56;
+    --muted: #8B87A8;
+    --violet: #6D28D9;
+    --violet-2: #8B5CF6;
+    --coral: #FF5470;
+    --yellow: #FFC93C;
+    --teal: #0F9B8E;
+    --line: #E7E3F5;
+    --card: #FFFFFF;
+    --radius: 16px;
+    --dash-panel: #242440;
+    --nav-bg: rgba(252,251,248,0.9);
+    --band: #F2EFFC;
+    color-scheme: light;
+  }
+  html[data-theme="dark"]{
+    --bg: #0E0E1B;
+    --ink: #F2F1FA;
+    --sub: #C7C4E0;
+    --muted: #8B87A8;
+    --violet: #A78BFA;
+    --violet-2: #C4B5FD;
+    --coral: #FF7A93;
+    --yellow: #FFD666;
+    --teal: #3FE0CD;
+    --line: #2C2B45;
+    --card: #17172B;
+    --dash-panel: #0E0E1B;
+    --nav-bg: rgba(14,14,27,0.85);
+    --band: #1B1A33;
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; transition:background 0.25s ease, color 0.25s ease;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.02em;}
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--violet-2); outline-offset:3px; border-radius:4px;}
+
+  /* NAV */
+  nav{position:sticky; top:0; z-index:50; background:var(--nav-bg); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); transition:background 0.25s ease, border-color 0.25s ease;}
+  .navrow{display:flex; align-items:center; justify-content:space-between; padding:16px 0; gap:16px;}
+  .brand{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.02rem;}
+  .brand .dot{color:var(--coral);}
+  .nav-mid{display:flex; gap:24px; list-style:none; margin:0; padding:0;}
+  .nav-mid a{text-decoration:none; font-weight:600; font-size:0.86rem; font-family:'JetBrains Mono',monospace; color:var(--ink); opacity:0.75; transition:opacity 0.15s;}
+  .nav-mid a:hover{opacity:1; color:var(--violet);}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  .nav-cta{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.82rem; background:var(--ink); color:var(--bg); padding:10px 18px; border-radius:9px; text-decoration:none; white-space:nowrap;}
+  html[data-theme="dark"] .nav-cta{background:var(--violet-2); color:#0E0E1B;}
+  @media (max-width:860px){ .nav-mid{display:none;} }
+  .theme-toggle{width:44px; height:26px; border-radius:20px; border:1px solid var(--line); background:var(--card); position:relative; cursor:pointer; flex-shrink:0; transition:background 0.25s ease, border-color 0.25s ease; padding:0;}
+  .theme-toggle .knob{position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--bg); display:flex; align-items:center; justify-content:center; font-size:11px; transition:transform 0.25s ease;}
+  html[data-theme="dark"] .theme-toggle .knob{ transform:translateX(18px); }
+
+  /* HERO */
+  header.hero{padding:76px 0 60px; text-align:center;}
+  .eyebrow-pill{display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; font-weight:600; color:var(--violet); background:var(--band); padding:7px 16px; border-radius:20px; margin-bottom:22px;}
+  .eyebrow-pill .sw{width:7px; height:7px; border-radius:50%; background:var(--coral);}
+  .hero h1{font-size:clamp(2.3rem, 5.5vw, 3.9rem); font-weight:700; margin:0 auto 20px; max-width:15ch;}
+  .hero h1 .grad{background:linear-gradient(100deg, var(--violet) 0%, var(--coral) 60%, var(--yellow) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p.lede{font-size:1.1rem; color:var(--sub); max-width:52ch; margin:0 auto 30px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:52px;}
+  .btn{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.88rem; padding:14px 24px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:transform 0.15s ease, box-shadow 0.15s ease; border:2px solid transparent;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--ink); color:var(--bg); box-shadow:0 8px 0 -2px var(--coral);}
+  .btn-primary:hover{box-shadow:0 10px 0 -2px var(--coral);}
+  .btn-ghost{border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--bg);}
+
+  .dash{background:#17172B; border-radius:20px; box-shadow:0 30px 70px -22px rgba(23,23,43,0.4); overflow:hidden; max-width:760px; margin:0 auto; text-align:left;}
+  .dash-bar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:var(--dash-panel);}
+  .dash-bar .dots{display:flex; gap:7px;}
+  .dash-bar .dot{width:11px; height:11px; border-radius:50%;}
+  .dash-bar .dot.r{background:#FF5F57;} .dash-bar .dot.y{background:#FEBC2E;} .dash-bar .dot.g{background:#28C840;}
+  .dash-bar .label{font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#B9B6E8;}
+  .dash-body{padding:26px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:640px){ .dash-body{grid-template-columns:1fr;} }
+  .kpi-row{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  .kpi{background:var(--dash-panel); border-radius:10px; padding:14px 10px;}
+  .kpi .num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; color:var(--yellow);}
+  .kpi .lbl{font-family:'JetBrains Mono',monospace; font-size:0.63rem; color:#B9B6E8; margin-top:3px;}
+  .bars{display:flex; align-items:flex-end; gap:8px; height:100%;}
+  .bars i{display:block; border-radius:4px 4px 0 0; flex:1;}
+  .bars i:nth-child(1){height:40%; background:var(--violet-2);}
+  .bars i:nth-child(2){height:65%; background:var(--coral);}
+  .bars i:nth-child(3){height:52%; background:var(--teal);}
+  .bars i:nth-child(4){height:88%; background:var(--yellow);}
+  .bars i:nth-child(5){height:70%; background:var(--violet-2);}
+  .bars i:nth-child(6){height:96%; background:var(--coral);}
+  .bars i:nth-child(7){height:60%; background:var(--teal);}
+
+  /* SECTION SCAFFOLD */
+  .section{padding:64px 0;}
+  .section + .section{border-top:1px solid var(--line);}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 44px;}
+  .section-eyebrow{font-family:'JetBrains Mono',monospace; font-size:0.78rem; font-weight:700; color:var(--coral); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; display:block;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:12px;}
+  .section-head p{color:var(--sub); margin:0; font-size:1rem;}
+  .ver{display:flex; align-items:baseline; gap:14px; margin-bottom:34px; flex-wrap:wrap;}
+  .ver .tag{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.9rem; background:var(--ink); color:var(--yellow); padding:5px 12px; border-radius:20px;}
+  .ver h2{font-size:1.7rem;}
+  .ver .stamp{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.8rem;}
+
+  /* OFFERING CARDS (3-up, like consulting/training/reporting) */
+  .offer-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .offer-grid{grid-template-columns:1fr;} }
+  .offer-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px; transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease, border-color 0.25s ease;}
+  .offer-card:hover{transform:translateY(-4px); box-shadow:0 20px 44px -20px rgba(23,23,43,0.25);}
+  .offer-icon{width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:18px; color:#fff;}
+  .offer-card h3{font-size:1.2rem; margin-bottom:10px;}
+  .offer-card p{color:var(--sub); font-size:0.93rem; margin:0 0 16px;}
+  .offer-link{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:0.83rem; text-decoration:none; color:var(--violet);}
+  .offer-link:hover{color:var(--coral);}
+
+  /* HIGHLIGHT BANNER */
+  .banner{background:var(--ink); color:var(--bg); border-radius:24px; padding:56px 44px; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;}
+  html[data-theme="dark"] .banner{background:var(--band); border:1px solid var(--line);}
+  @media (max-width:800px){ .banner{grid-template-columns:1fr; padding:36px 26px;} }
+  .banner .section-eyebrow{color:var(--yellow);}
+  .banner h2{color:var(--bg); font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:16px;}
+  html[data-theme="dark"] .banner h2{color:var(--ink);}
+  .banner p{color:#C7C4E0; font-size:1rem; margin:0 0 22px;}
+  html[data-theme="dark"] .banner p{color:var(--sub);}
+  .banner-stats{display:flex; flex-direction:column; gap:18px;}
+  .bstat{border-left:3px solid var(--coral); padding-left:16px;}
+  .bstat .n{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.8rem; color:var(--yellow);}
+  .bstat .l{font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#B9B6E8;}
+  html[data-theme="dark"] .bstat .l{color:var(--muted);}
+
+  /* FEATURED CASE STUDY */
+  .case{display:grid; grid-template-columns:0.9fr 1.1fr; gap:44px; align-items:center;}
+  @media (max-width:800px){ .case{grid-template-columns:1fr;} }
+  .case-visual{background:linear-gradient(135deg,var(--violet),var(--coral)); border-radius:20px; padding:32px; color:#fff; min-height:260px; display:flex; flex-direction:column; justify-content:space-between;}
+  .case-visual .tag-sm{font-family:'JetBrains Mono',monospace; font-size:0.75rem; opacity:0.85;}
+  .case-visual .big-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:2.6rem;}
+  .case h3{font-size:1.6rem; margin-bottom:14px;}
+  .case p{color:var(--sub); margin:0 0 18px;}
+  .case ul{margin:0 0 22px; padding-left:20px; color:var(--sub); font-size:0.95rem;}
+  .case li{margin-bottom:8px;}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:860px){ .testi-grid{grid-template-columns:1fr;} }
+  .testi-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:background 0.25s ease, border-color 0.25s ease;}
+  .testi-card .quote-mark{font-family:'Space Grotesk',sans-serif; font-size:2.2rem; color:var(--violet); line-height:1; margin-bottom:10px; display:block;}
+  .testi-card p{color:var(--sub); font-size:0.94rem; margin:0 0 18px;}
+  .testi-who{display:flex; align-items:center; gap:12px;}
+  .testi-avatar{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; font-size:0.85rem; flex-shrink:0;}
+  .testi-who .name{font-weight:700; font-size:0.88rem;}
+  .testi-who .role{font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--muted);}
+  .placeholder-note{text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--muted); margin-top:24px;}
+
+  /* EXPERTISE / SKILLS */
+  .badge-grid{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:8px; justify-content:center;}
+  .badge{font-family:'JetBrains Mono',monospace; font-size:0.83rem; font-weight:600; padding:9px 14px; border-radius:8px; background:var(--card); border:1px solid var(--line); display:inline-flex; align-items:center; gap:8px; transition:background 0.25s ease, border-color 0.25s ease;}
+  .badge .swatch{width:9px; height:9px; border-radius:50%;}
+  .subhead{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--muted); margin:26px 0 12px; text-transform:uppercase; letter-spacing:0.06em; text-align:center;}
+
+  /* IMPACT */
+  .impact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:860px){ .impact-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .impact-grid{grid-template-columns:1fr;} }
+  .impact-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease, border-color 0.25s ease;}
+  .impact-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -18px rgba(23,23,43,0.22);}
+  .impact-card .icon{width:36px; height:36px; border-radius:9px; margin-bottom:14px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff;}
+  .impact-card p{color:var(--sub); font-size:0.92rem; margin:0;}
+  .impact-card .big{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.5rem; margin-bottom:4px;}
+
+  /* EXPERIENCE */
+  .commit-log{border-left:2px solid var(--line); margin-left:6px; padding-left:28px;}
+  .commit{position:relative; padding-bottom:30px;}
+  .commit:last-child{padding-bottom:0;}
+  .commit::before{content:""; position:absolute; left:-33.5px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--coral); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--coral);}
+  .commit:nth-child(2)::before{background:var(--violet); box-shadow:0 0 0 2px var(--violet);}
+  .commit .hash{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.8rem;}
+  .commit h3{font-size:1.12rem; margin:4px 0 2px;}
+  .commit .role-meta{font-family:'JetBrains Mono',monospace; font-size:0.83rem; color:var(--violet); margin-bottom:10px; display:block;}
+  .commit ul{margin:0; padding-left:18px; color:var(--sub); font-size:0.93rem;}
+  .commit li{margin-bottom:6px;}
+
+  /* CERTS + EDU */
+  .cert-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media (max-width:700px){ .cert-grid{grid-template-columns:1fr;} }
+  .cert-item{display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; transition:background 0.25s ease, border-color 0.25s ease;}
+  .cert-item .badge-dot{width:34px; height:34px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-weight:700; color:#fff; font-size:0.7rem;}
+  .cert-item span.name{font-size:0.9rem; font-weight:600;}
+  .edu-row{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin-top:14px; transition:background 0.25s ease, border-color 0.25s ease;}
+  .edu-row h3{font-size:1.05rem;}
+  .edu-row .stamp{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.82rem;}
+
+  /* FOOTER */
+  footer{background:var(--ink); color:var(--bg); padding:64px 0 32px; transition:background 0.25s ease;}
+  html[data-theme="dark"] footer{background:var(--band); border-top:1px solid var(--line);}
+  .foot-cta{text-align:center; max-width:560px; margin:0 auto 52px;}
+  .foot-cta h2{color:var(--bg); font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:14px;}
+  html[data-theme="dark"] .foot-cta h2{color:var(--ink);}
+  .foot-cta p{color:#B9B6E8; margin:0 0 24px;}
+  html[data-theme="dark"] .foot-cta p{color:var(--sub);}
+  .foot-cols{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px; padding-top:36px; border-top:1px solid #2C2B45;}
+  @media (max-width:760px){ .foot-cols{grid-template-columns:1fr; gap:26px;} }
+  .foot-cols h4{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:#8B87A8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;}
+  .foot-cols a{display:block; text-decoration:none; color:#DAD8ED; font-size:0.9rem; margin-bottom:10px; opacity:0.9;}
+  html[data-theme="dark"] .foot-cols a{color:var(--sub);}
+  .foot-cols a:hover{color:var(--yellow); opacity:1;}
+  .foot-bottom{text-align:center; margin-top:40px; font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:#8B87A8;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navrow">
+    <div class="brand">Raguram<span class="dot">.</span>RK</div>
+    <ul class="nav-mid">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="knob" aria-hidden="true">☀</span>
+      </button>
+      <a class="nav-cta" href="mailto:raguram2410@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow-pill"><span class="sw"></span>Your Data Analyst</span>
+    <h1>Data Expertise <span class="grad">That Drives Decisions</span></h1>
+    <p class="lede">From dashboard architecture to workflow automation, I turn scattered data into reporting systems that leadership actually trusts — delivering $2M+ in measurable savings along the way.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#services">See what I do →</a>
+      <a class="btn btn-ghost" href="mailto:raguram2410@gmail.com">Book a call</a>
+    </div>
+    <div class="dash" aria-hidden="true">
+      <div class="dash-bar">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <span class="label">impact_dashboard.pbix</span>
+      </div>
+      <div class="dash-body">
+        <div class="kpi-row" style="grid-column:1/-1;">
+          <div class="kpi"><div class="num">$2M+</div><div class="lbl">COST SAVINGS</div></div>
+          <div class="kpi"><div class="num">6 FTE</div><div class="lbl">EFFICIENCY GAIN</div></div>
+          <div class="kpi"><div class="num">25%</div><div class="lbl">FASTER DECISIONS</div></div>
+        </div>
+        <div class="bars" style="grid-column:1/-1; height:70px;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">What I do</span>
+      <h2>Analytics Solutions for You</h2>
+      <p>From building your reporting suite to automating the workflows that feed it, here's where I add the most value.</p>
+    </div>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-icon" style="background:var(--violet);">◆</div>
+        <h3>Dashboard Development</h3>
+        <p>End-to-end Power BI and Tableau dashboards — from requirements gathering to deployment — built for clarity, performance, and adoption, not just visuals.</p>
+        <a class="offer-link" href="#impact">See the results →</a>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon" style="background:var(--coral);">◆</div>
+        <h3>Data Modeling &amp; ETL</h3>
+        <p>Clean, consistent data models and pipelines that keep every report telling the same story — with SQL, DAX, and Fabric behind the scenes.</p>
+        <a class="offer-link" href="#expertise">See the toolkit →</a>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon" style="background:var(--teal);">◆</div>
+        <h3>Workflow Automation</h3>
+        <p>Power Apps and Power Automate solutions that replace manual processes and legacy tools — cutting cost and cycle time without cutting corners.</p>
+        <a class="offer-link" href="#case">Read the case study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="banner">
+      <div>
+        <span class="section-eyebrow">Make analytics the cornerstone</span>
+        <h2>Clarity is a competitive edge</h2>
+        <p>Without streamlined analytics, unanswered questions hold a business back. I help teams turn raw data into clear, actionable insight — so decisions get made with confidence, not guesswork.</p>
+        <a class="btn btn-primary" href="mailto:raguram2410@gmail.com">Let's talk about your data →</a>
+      </div>
+      <div class="banner-stats">
+        <div class="bstat"><div class="n">45+</div><div class="l">DASHBOARDS SHIPPED</div></div>
+        <div class="bstat"><div class="n">99%</div><div class="l">DATA ACCURACY MAINTAINED</div></div>
+        <div class="bstat"><div class="n">40%</div><div class="l">LESS MANUAL RECONCILIATION</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="case">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Featured work</span>
+      <h2>Replacing SAP Ariba, the Power Platform way</h2>
+    </div>
+    <div class="case">
+      <div class="case-visual">
+        <span class="tag-sm">FEATURED PROJECT · SHELL</span>
+        <div>
+          <div class="big-num">$1M</div>
+          <div class="tag-sm">saved annually</div>
+        </div>
+      </div>
+      <div>
+        <h3>From licensed software to a Power Platform solution</h3>
+        <p>Shell was paying significant licensing costs to run SAP Ariba for a process that didn't need its full weight. I designed a replacement using Power Apps integrated with SharePoint, Power BI, and Power Automate.</p>
+        <ul>
+          <li>Centralized data collection with a custom Power Apps interface</li>
+          <li>Automated approvals and routing with Power Automate</li>
+          <li>Live reporting layer built in Power BI for full visibility</li>
+        </ul>
+        <p><strong>Result:</strong> $1M in annual savings, workflows streamlined by 20%, and full ownership of the tool stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">What people say</span>
+      <h2>Trusted by the teams I work with</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="quote-mark">"</span>
+        <p>Raguram's dashboards didn't just look good — they became the thing leadership actually opened every Monday morning.</p>
+        <div class="testi-who">
+          <div class="testi-avatar" style="background:var(--violet);">SM</div>
+          <div><div class="name">Senior Manager</div><div class="role">Energy sector client</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-mark">"</span>
+        <p>He replaced a process we'd been paying for years to license, and it works better than the original.</p>
+        <div class="testi-who">
+          <div class="testi-avatar" style="background:var(--coral);">OM</div>
+          <div><div class="name">Operations Manager</div><div class="role">Procurement team</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-mark">"</span>
+        <p>Clear communication, fast turnaround, and dashboards our whole team could actually understand.</p>
+        <div class="testi-who">
+          <div class="testi-avatar" style="background:var(--teal);">BA</div>
+          <div><div class="name">Business Analyst</div><div class="role">Cross-functional partner</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="placeholder-note">// placeholder quotes — swap in real testimonials from managers or colleagues when you have them</p>
+  </div>
+</section>
+
+<section class="section" id="expertise">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Toolkit</span>
+      <h2>Expertise &amp; Tools</h2>
+    </div>
+    <div class="subhead">Technical skills</div>
+    <div class="badge-grid">
+      <span class="badge"><span class="swatch" style="background:var(--violet)"></span>Power BI</span>
+      <span class="badge"><span class="swatch" style="background:var(--coral)"></span>Power Apps</span>
+      <span class="badge"><span class="swatch" style="background:var(--teal)"></span>Power Automate</span>
+      <span class="badge"><span class="swatch" style="background:var(--yellow)"></span>SQL</span>
+      <span class="badge"><span class="swatch" style="background:var(--violet)"></span>Excel</span>
+      <span class="badge"><span class="swatch" style="background:var(--coral)"></span>DAX</span>
+      <span class="badge"><span class="swatch" style="background:var(--teal)"></span>Tableau</span>
+      <span class="badge"><span class="swatch" style="background:var(--yellow)"></span>Microsoft Fabric</span>
+      <span class="badge"><span class="swatch" style="background:var(--violet)"></span>Azure</span>
+      <span class="badge"><span class="swatch" style="background:var(--coral)"></span>Figma</span>
+    </div>
+    <div class="subhead">Core expertise</div>
+    <div class="badge-grid">
+      <span class="badge">Data Visualization</span>
+      <span class="badge">ETL</span>
+      <span class="badge">Data Modeling</span>
+      <span class="badge">Dashboard Development</span>
+      <span class="badge">BI Reporting</span>
+      <span class="badge">Digital Transformation</span>
+      <span class="badge">KPI &amp; Metric Tracking</span>
+      <span class="badge">Stakeholder Management</span>
+      <span class="badge">Workflow Automation</span>
+      <span class="badge">Performance Optimization</span>
+      <span class="badge">Requirements Gathering</span>
+      <span class="badge">Testing &amp; Deployment</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="impact">
+  <div class="wrap">
+    <div class="ver"><span class="tag">v2.0</span><h2>Impact Highlights</h2><span class="stamp">// results that mattered</span></div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="icon" style="background:var(--violet)">◆</div>
+        <div class="big">20+ dashboards</div>
+        <p>Designed, deployed, and managed at Shell — resulting in $1M cost savings and 1.5 FTE efficiency gain.</p>
+      </div>
+      <div class="impact-card">
+        <div class="icon" style="background:var(--coral)">◆</div>
+        <div class="big">$1M saved / year</div>
+        <p>Replaced SAP Ariba and reduced license costs by integrating Power Apps with SharePoint, Power BI, and Power Automate.</p>
+      </div>
+      <div class="impact-card">
+        <div class="icon" style="background:var(--teal)">◆</div>
+        <div class="big">40% faster</div>
+        <p>Built and maintained 5+ data models, ensuring 100% data consistency and cutting manual reconciliation effort.</p>
+      </div>
+      <div class="impact-card">
+        <div class="icon" style="background:var(--yellow)">◆</div>
+        <div class="big">35% faster load</div>
+        <p>Optimized dashboard performance, lifting stakeholder engagement by 40% measured via Power BI usage metrics.</p>
+      </div>
+      <div class="impact-card">
+        <div class="icon" style="background:var(--violet-2)">◆</div>
+        <div class="big">6 FTE / year</div>
+        <p>Improved efficiency and compliance through automation and training — a 60% rise in tool adoption, 30% fewer manual errors.</p>
+      </div>
+      <div class="impact-card">
+        <div class="icon" style="background:var(--coral)">◆</div>
+        <div class="big">99% accuracy</div>
+        <p>Streamlined data workflows with SSIS/SSMS and Row-Level Security across departments at Infosys.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="ver"><span class="tag">v3.0</span><h2>Experience</h2><span class="stamp">// where I've worked</span></div>
+    <div class="commit-log">
+      <div class="commit">
+        <span class="hash mono">Present</span>
+        <h3>Data Analyst</h3>
+        <span class="role-meta">Shell · Chennai, India · May 2022 — Present</span>
+        <ul>
+          <li>Designed, developed, deployed, and managed 20+ Power BI dashboards, resulting in $1M cost savings and 1.5 FTE efficiency gain.</li>
+          <li>Built and maintained 5+ data models, ensuring 100% data consistency and reducing manual reconciliation by 40%.</li>
+          <li>Implemented a Power Apps + Power Automate data collection tool feeding a Power BI reporting suite, cutting process time by 20%.</li>
+          <li>Optimized dashboard performance — 35% faster load times, 40% higher stakeholder engagement.</li>
+          <li>Replaced SAP Ariba with a Power Apps + SharePoint solution, saving $1M annually and streamlining workflows by 20%.</li>
+          <li>Drove 6 FTE savings per year through automation and training, lifting tool adoption 60% and cutting manual errors 30%.</li>
+        </ul>
+      </div>
+      <div class="commit">
+        <span class="hash mono">2019–22</span>
+        <h3>Power BI Developer</h3>
+        <span class="role-meta">Infosys · Chennai, India · Dec 2019 — May 2022</span>
+        <ul>
+          <li>Scoped and built 25+ dashboards in Power BI and Tableau, improving KPI visibility and lifting operational efficiency 15%.</li>
+          <li>Designed intuitive UI/UX layouts in Figma, boosting engagement and cutting dashboard revision cycles.</li>
+          <li>Streamlined data workflows with SSIS/SSMS, implemented Row-Level Security, and held 99% data accuracy across departments.</li>
+          <li>Embedded Power BI dashboards into webpages, improving accessibility and accelerating decision-making.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="certifications">
+  <div class="wrap">
+    <div class="ver"><span class="tag">v3.1</span><h2>Certifications &amp; Education</h2><span class="stamp">// credentials</span></div>
+    <div class="cert-grid">
+      <div class="cert-item"><div class="badge-dot" style="background:var(--violet)">DP-600</div><span class="name">Microsoft Certified: Fabric Analytics Engineer Associate</span></div>
+      <div class="cert-item"><div class="badge-dot" style="background:var(--coral)">PL-300</div><span class="name">Microsoft Certified: Power BI Data Analyst Associate</span></div>
+      <div class="cert-item"><div class="badge-dot" style="background:var(--teal)">DP-900</div><span class="name">Microsoft Certified: Azure Data Fundamentals</span></div>
+      <div class="cert-item"><div class="badge-dot" style="background:var(--yellow)">AZ-900</div><span class="name">Microsoft Certified: Azure Fundamentals</span></div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <h3>B.E. Computer Science and Engineering</h3>
+        <span class="stamp mono">S. A. Engineering College, Chennai</span>
+      </div>
+      <span class="stamp">2015 — 2019</span>
+    </div>
+    <div class="edu-row">
+      <div><h3>Python Basics for Data Science</h3></div>
+      <span class="stamp">edX</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-cta">
+      <h2>Let's talk data.</h2>
+      <p>Open to data analyst and BI roles, plus freelance dashboard work. Usually replies within a day.</p>
+      <a class="btn btn-primary" href="mailto:raguram2410@gmail.com">Book a call</a>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h4>RAGURAM RAMESH KUMAR</h4>
+        <a href="mailto:raguram2410@gmail.com">raguram2410@gmail.com</a>
+        <a href="tel:+919791093417">+91 9791093417</a>
+        <a>Chennai, India</a>
+      </div>
+      <div>
+        <h4>NAVIGATE</h4>
+        <a href="#services">Services</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+      </div>
+      <div>
+        <h4>CONNECT</h4>
+        <a href="https://www.linkedin.com/in/ragu-ram/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:raguram2410@gmail.com">Email</a>
+      </div>
+    </div>
+    <p class="foot-bottom">© 2026 Raguram Ramesh Kumar</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var knob = toggle.querySelector('.knob');
+
+    function apply(theme){
+      root.setAttribute('data-theme', theme);
+      var isDark = theme === 'dark';
+      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      knob.textContent = isDark ? '☾' : '☀';
+    }
+
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    apply(prefersDark ? 'dark' : 'light');
+
+    toggle.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      apply(next);
+    });
+  })();
+</script>
+</body>
+</html>
